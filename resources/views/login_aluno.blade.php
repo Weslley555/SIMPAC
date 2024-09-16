@@ -1,135 +1,121 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="pt-br">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal do Aluno</title>
-
-    <!-- Fonte do Google (se preferir) -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    
-    <!-- Incluindo o CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
         }
-
         .login-container {
-            background-color: white;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 500px;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
             text-align: center;
+            box-sizing: border-box;
         }
-
         .login-container img {
-            width: 80px;
-            height: 80px;
+            width: 150px;
+            height: auto;
             margin-bottom: 20px;
         }
-
         .login-container h1 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
+            font-size: 24px;
             color: #333;
         }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 1.2rem;
-        }
-
-        .input-group label {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 0.5rem;
-        }
-
-        .input-group input {
-            padding: 0.8rem;
-            font-size: 1rem;
+        .login-container input, .login-container button {
+            width: calc(100% - 20px);
+            padding: 15px;
+            margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
-
-        .login-button {
+        .login-container button {
             background-color: #007bff;
             color: white;
-            padding: 0.8rem;
-            font-size: 1rem;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
-            width: 100%;
-            margin-top: 1rem;
+            font-size: 16px;
         }
-
-        .login-button:hover {
+        .login-container button:hover {
             background-color: #0056b3;
         }
-
-        .forgot-password {
-            display: block;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #555;
+        .login-container .forgot-password {
+            margin-top: 20px;
+            color: #007bff;
             text-decoration: none;
         }
-
-        .forgot-password:hover {
+        .login-container .forgot-password:hover {
             text-decoration: underline;
         }
-
-        /* Responsivo */
-        @media screen and (max-width: 768px) {
+        @media (max-width: 768px) {
             .login-container {
-                padding: 1.5rem;
-                width: 90%;
+                padding: 15px;
+            }
+            .login-container h1 {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <!-- Logo -->
-        <img src="{{ asset('https://www.sejabixo.com.br/wp-content/uploads/2021/06/vestibular-univicosa.jpg') }}" alt="Logo Portal do Aluno">
-
-        <!-- Título -->
-        <h1>Portal do Aluno</h1>
-
-        <!-- Formulário de Login -->
-        <form action="/tela_ini_aluno" method="GET">
-            <div class="input-group">
-                <label for="matricula">Coloque sua matrícula</label>
-                <input type="text" id="matricula" name="matricula" placeholder="Digite sua matrícula">
-            </div>
-            <div class="input-group">
-                <label for="senha">Coloque sua senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
-            </div>
-        
-            <!-- Botão de Login -->
-            <button class="login-button" type="submit">LOGIN</button>
+        <img src="https://th.bing.com/th/id/OIP.NMGh9O8R4YWNVTjGJHUJqwHaFg?rs=1&pid=ImgDetMain" alt="Portal do Aluno">
+        <h1>PORTAL DO ALUNO</h1>
+        <form action="{{ route('login.authenticate') }}" method="POST">
+            @csrf
+            <input type="text" name="matricula" placeholder="Coloque sua matrícula" required>
+            <input type="password" name="senha" placeholder="Coloque sua senha" required>
+            <button type="submit">LOGIN</button>
         </form>
-        
-        
-
-        <!-- Esqueceu a senha -->
         <a href="#" class="forgot-password">Esqueceu a senha?</a>
     </div>
+
+    <!-- Modal de erro -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Erro de Autenticação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Dados incorretos. Tente novamente.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        @if ($errors->any())
+            $(document).ready(function() {
+                $('#errorModal').modal('show'); // Exibe o modal quando há erros
+            });
+        @endif
+    </script>
 </body>
 </html>
