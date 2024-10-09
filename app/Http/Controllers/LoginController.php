@@ -13,6 +13,10 @@ class LoginController extends Controller
 
         // Verificação simples de credenciais (substitua por lógica real)
         if ($matricula == '123456' && $senha == 'senha123') {
+            // Aqui você pode definir a lógica para autenticar o usuário,
+            // por exemplo, salvando a sessão, definindo o usuário autenticado, etc.
+            // Exemplo:
+            $request->session()->put('user_id', $matricula); // Exemplo simples
             return redirect()->route('bemvindo');
         }
 
@@ -26,8 +30,18 @@ class LoginController extends Controller
         session()->flush();
 
         // Redirecionar para a página de login
-        return redirect()->route('login');
+        return redirect()->route('bemvindo');
     }
+
+    public function logoutToLogin()
+    {
+        // Destruir sessão e/ou outras ações de logout
+        session()->flush();
+
+        // Redirecionar para a página de login
+        return redirect()->route('login'); // Redireciona para a página de login
+    }
+
 }
 
 

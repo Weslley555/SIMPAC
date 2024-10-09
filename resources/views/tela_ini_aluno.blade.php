@@ -216,13 +216,13 @@
     <div class="menu" id="sideMenu">
         <h3> <br> </h3> 
         <ul>
-            <li><a href="#">Página Inicial</a></li>
+            <li><a href="{{ route('submeter.trabalho') }}">Submeter Trabalho</a></li>
             <li><a href="#">Trabalhos Avaliados</a></li>
             <li><a href="#">Trabalhos Submetidos</a></li>
-            <li><a href="#">Perfil</a></li>
+            <li><a href="{{ route('perfil') }}">Perfil</a></li>
             <li>
                 <!-- Formulário para logout no menu -->
-                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                <form action="{{ route('logoutToLogin') }}" method="POST" style="display: inline;">
                     @csrf
                     <button type="submit" style="background: none; border: none; color: #007bff; font-size: 18px; cursor: pointer;">Desconectar</button>
                 </form>

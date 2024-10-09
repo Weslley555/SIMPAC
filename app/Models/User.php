@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Relacionamento: Um usuário tem um perfil de aluno
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
 }
