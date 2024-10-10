@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Models\Aluno;
 
 // Rota para exibir a página inicial
@@ -38,3 +39,23 @@ Route::get('/perfil', function () {
 Route::get('/submeter-trabalho', function () {
     return view('submeter_trabalho'); // Certifique-se de que a view 'submeter_trabalho' exista
 })->name('submeter.trabalho');
+
+use Illuminate\Support\Facades\DB;
+
+Route::get('/test-db', function () {
+    try {
+        DB::connection()->getPdo();
+        return 'Conexão com o banco de dados foi bem-sucedida!';
+    } catch (\Exception $e) {
+        return 'Erro na conexão: ' . $e->getMessage();
+    }
+});
+
+
+
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate');
+
+Route::get('/portal-aluno', function () {
+    return view('portal.aluno');
+})->middleware('auth')->name('portal.aluno');
+
