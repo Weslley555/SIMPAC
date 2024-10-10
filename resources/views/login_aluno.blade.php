@@ -77,7 +77,7 @@
     <div class="login-container">
         <img src="https://th.bing.com/th/id/OIP.NMGh9O8R4YWNVTjGJHUJqwHaFg?rs=1&pid=ImgDetMain" alt="Portal do Aluno">
         <h1>PORTAL DO ALUNO</h1>
-        <form action="{{ route('admin_login') }}" method="POST">
+        <form action="{{ route('login.authenticate') }}" method="POST">
             @csrf
             <input type="text" name="matricula" placeholder="Coloque sua matrícula" required>
             <input type="password" name="senha" placeholder="Coloque sua senha" required>

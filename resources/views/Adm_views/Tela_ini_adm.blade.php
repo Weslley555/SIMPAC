@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('gerenciar_usuarios') }}">Gerenciar Usuários</a>
+                    <a class="nav-link" href="{{ route('admin.gerenciar_usuarios') }}">Gerenciar Usuários</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Gerenciar Trabalhos</a>
@@ -58,7 +58,7 @@
     <div class="container text-center">
         <h1>Bem-vindo, Administrador</h1>
         <p>Selecione uma das opções abaixo:</p>
-        <a href="{{ route('gerenciar_usuarios') }}" class="btn btn-primary btn-custom">Gerenciar Usuário</a>
+        <a href="{{ route('admin.gerenciar_usuarios') }}" class="btn btn-primary btn-custom">Gerenciar Usuário</a>
         <a href="#" class="btn btn-secondary btn-custom">Gerenciar Trabalhos</a>
         <a href="#" class="btn btn-success btn-custom">Gerenciar Permissões</a>
     </div>

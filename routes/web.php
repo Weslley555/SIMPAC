@@ -26,6 +26,17 @@ Route::get('/bem-vindo', function () {
 // Logout Aluno
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('/perfil', function () {
+    $aluno = auth()->user(); // Obtendo o aluno autenticado
+    return view('perfil_aluno', compact('aluno')); // Passando o aluno para a view
+})->name('perfil');
+
+Route::post('/logout-to-login', [LoginController::class, 'logoutToLogin'])->name('logoutToLogin');
+
+Route::get('/submeter-trabalho', function () {
+    return view('submeter_trabalho'); // Certifique-se de que a view 'submeter_trabalho' exista
+})->name('submeter.trabalho');
+
 // Rotas do Administrador
 Route::get('/admin/login', function () {
     return view('Adm_views.login_adm'); // Certifique-se de que a view de login do ADM exista
