@@ -12,7 +12,7 @@ class LoginController extends Controller
         $senha = $request->input('senha');
 
         // Verificação simples de credenciais (substitua por lógica real)
-        if ($matricula == '123456' && $senha == 'senha123') {
+        if ($matricula == '12345' && $senha == '1') {
             // Aqui você pode definir a lógica para autenticar o usuário,
             // por exemplo, salvando a sessão, definindo o usuário autenticado, etc.
             // Exemplo:
