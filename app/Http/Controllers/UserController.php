@@ -21,8 +21,9 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('Adm.views.cadastrar_usuario');
+    return view('Adm_views.cadastrar_usuario'); // Corrija o caminho aqui
     }
+
 
     public function destroy($id)
 {
