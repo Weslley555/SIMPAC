@@ -39,10 +39,10 @@
                     <a class="nav-link" href="{{ route('admin.gerenciar_usuarios') }}">Gerenciar Usuários</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Gerenciar Trabalhos</a>
+                    <a class="nav-link" href="{{ route('admin.gerenciar_trabalhos') }}">Gerenciar Trabalhos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Gerenciar Permissões</a>
+                    <a class="nav-link" href="{{ route('admin.gerenciar_permissoes') }}">Gerenciar Permissões</a>
                 </li>
                 <li class="nav-item">
                     <form action="{{ route('admin.logout') }}" method="POST">
@@ -59,9 +59,10 @@
         <h1>Bem-vindo, Administrador</h1>
         <p>Selecione uma das opções abaixo:</p>
         <a href="{{ route('admin.gerenciar_usuarios') }}" class="btn btn-primary btn-custom">Gerenciar Usuário</a>
-        <a href="#" class="btn btn-secondary btn-custom">Gerenciar Trabalhos</a>
-        <a href="#" class="btn btn-success btn-custom">Gerenciar Permissões</a>
+        <a href="{{ route('admin.gerenciar_trabalhos') }}" class="btn btn-secondary btn-custom">Gerenciar Trabalhos</a>
+        <a href="{{ route('admin.gerenciar_permissoes') }}" class="btn btn-success btn-custom">Gerenciar Permissões</a>
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

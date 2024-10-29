@@ -7,7 +7,7 @@
     
     <div class="d-flex flex-column align-items-center">
         <a href="{{ route('login') }}" class="btn btn-primary mb-3" style="width: 220px; font-size: 1.1rem;">Login Aluno</a>
-        <a href="{{ route('admin_login') }}" class="btn btn-secondary mb-3" style="width: 220px; font-size: 1.1rem;">Login Administrador</a>
+        <a href="{{ route('admin.login') }}" class="btn btn-secondary mb-3" style="width: 220px; font-size: 1.1rem;">Login Administrador</a>
         <a href="#" class="btn btn-success" style="width: 220px; font-size: 1.1rem;">Login Avaliador</a>
     </div>
 </div>
