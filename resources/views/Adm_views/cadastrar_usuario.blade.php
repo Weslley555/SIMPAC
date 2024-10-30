@@ -58,8 +58,20 @@
                     <input type="text" class="form-control" id="matricula" name="matricula" required>
                 </div>
                 <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
                     <label for="senha">Senha</label>
                     <input type="password" class="form-control" id="senha" name="senha" required>
+                </div>
+                <div class="form-group">
+                    <label for="tipo">Tipo de Usuário</label>
+                    <select class="form-control" id="tipo" name="tipo" required>
+                        <option value="aluno">Aluno</option>
+                        <option value="professor">Professor</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
                 <a href="{{ route('admin.gerenciar_usuarios') }}" class="btn btn-secondary">Voltar</a>
@@ -71,4 +83,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 

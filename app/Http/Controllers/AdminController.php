@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -45,6 +46,34 @@ class AdminController extends Controller
         return view('Adm_views.Tela_ini_adm');
     }
 
+    public function create()
+    {
+        return view('Adm_views.cadastrar_usuario'); // View para cadastrar usuário
+    }
+
+    public function store(Request $request)
+    {
+        // Validação dos dados recebidos
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'matricula' => 'required|string|max:255',
+            'email' => 'required|email|unique:usuarios,email',
+            'senha' => 'required|string|min:8',
+            'tipo' => 'required|string',
+        ]);
+
+        // Criação do novo usuário
+        User::create([ // Certifique-se de que está usando o modelo correto
+            'nome' => $request->nome,
+            'matricula' => $request->matricula,
+            'email' => $request->email,
+            'senha' => Hash::make($request->senha), // Senha criptografada
+            'tipo_usuario' => $request->tipo,
+        ]);
+
+        return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Usuário cadastrado com sucesso!');
+    }
+
     public function gerenciarUsuarios()
     {
         $usuarios = User::all(); // Substitua pelo seu modelo de usuários
@@ -59,5 +88,13 @@ class AdminController extends Controller
     public function gerenciarPermissoes()
     {
         return view('Adm_views.gerenciar_permissoes');
+    }
+
+    public function destroy($id)
+    {
+        // Aqui você deve implementar a lógica para deletar o usuário do banco de dados
+        User::findOrFail($id)->delete(); // Deletando o usuário pelo ID
+
+        return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Usuário deletado com sucesso!');
     }
 }

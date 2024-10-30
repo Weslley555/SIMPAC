@@ -5,10 +5,14 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\DB;
 
-
+// Rota para exibir o formulário de cadastro de novo usuário
+Route::get('/admin/cadastrar-usuario', [AdminController::class, 'create'])->name('admin.cadastrar_usuario');
 
 // Rota para gerenciar usuários
 Route::get('/admin/gerenciar-usuarios', [AdminController::class, 'gerenciarUsuarios'])->name('admin.gerenciar_usuarios');
+
+// Rota para armazenar um novo usuário
+Route::post('/admin/cadastrar-usuario', [AdminController::class, 'store'])->name('admin.store_usuario'); // Atualizado para usar AdminController
 
 // Rota para gerenciar trabalhos (ainda a ser implementado)
 Route::get('/admin/gerenciar-trabalhos', [AdminController::class, 'gerenciarTrabalhos'])->name('admin.gerenciar_trabalhos');

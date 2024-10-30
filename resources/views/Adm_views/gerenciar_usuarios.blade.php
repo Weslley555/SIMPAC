@@ -70,12 +70,12 @@
             <tbody>
                 @foreach($usuarios as $usuario)
                 <tr>
-                    <td>{{ $usuario['nome'] }}</td> <!-- Acesso ao array -->
-                    <td>{{ $usuario['matricula'] }}</td>
-                    <td>{{ $usuario['tipo'] }}</td>
+                    <td>{{ $usuario->nome }}</td> <!-- Acesso ao objeto -->
+                    <td>{{ $usuario->matricula }}</td>
+                    <td>{{ $usuario->tipo_usuario }}</td>
                     <td>
                         <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('admin.delete_usuario', $usuario['id']) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('admin.delete_usuario', $usuario->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
