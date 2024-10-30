@@ -46,6 +46,17 @@ Route::get('/bem-vindo', function () {
     return view('Tela_ini_aluno');
 })->name('bemvindo');
 
+// Rota para a tela de submeter trabalho
+Route::get('/submeter-trabalho', function () {
+    return view('submeter_trabalho'); // Certifique-se de que a view 'submeter_trabalho' exista
+})->name('submeter.trabalho');
+
+// Rota para a tela de perfil do aluno
+Route::get('/perfil', function () {
+    $aluno = auth()->user(); // Obtendo o aluno autenticado
+    return view('perfil_aluno', compact('aluno')); // Passando o aluno para a view
+})->name('perfil');
+
 // Rota para logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
