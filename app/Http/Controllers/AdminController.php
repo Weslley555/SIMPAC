@@ -12,8 +12,8 @@ class AdminController extends Controller
 {
     public function logout()
     {
-        Auth::guard('admin')->logout();  // Verifica se o guard 'admin' está configurado corretamente
-        return redirect()->route('admin.login');  // Redireciona para a página de login do admin
+        Auth::guard('admin')->logout(); // Verifica se o guard 'admin' está configurado corretamente
+        return redirect()->route('admin.login'); // Redireciona para a página de login do admin
     }
 
     public function showLoginForm()
@@ -30,7 +30,6 @@ class AdminController extends Controller
 
         $usuario = $request->input('usuario');
         $senha = $request->input('senha');
-
         $admin = Admin::where('usuario', $usuario)->first();
 
         if ($admin && Hash::check($senha, $admin->senha)) {
@@ -63,7 +62,7 @@ class AdminController extends Controller
         ]);
 
         // Criação do novo usuário
-        User::create([ // Certifique-se de que está usando o modelo correto
+        User::create([
             'nome' => $request->nome,
             'matricula' => $request->matricula,
             'email' => $request->email,
@@ -94,7 +93,6 @@ class AdminController extends Controller
     {
         // Aqui você deve implementar a lógica para deletar o usuário do banco de dados
         User::findOrFail($id)->delete(); // Deletando o usuário pelo ID
-
         return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Usuário deletado com sucesso!');
     }
 }

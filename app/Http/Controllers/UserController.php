@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
         // Busca os usuários do banco de dados
-        $usuarios = Usuario::all(); // Recupera todos os usuários
-
+        $usuarios = User::all(); // Recupera todos os usuários
         return view('Adm_views.gerenciar_usuarios', compact('usuarios'));
     }
 
@@ -33,14 +33,14 @@ class UserController extends Controller
         ]);
 
         // Criação do novo usuário
-        $usuario = new Usuario();
-        $usuario->nome = $request->nome;
-        $usuario->email = $request->email;
-        $usuario->tipo = $request->tipo;
-        $usuario->matricula = $request->tipo === 'aluno' ? $request->matricula : null;
-        $usuario->identificacao = $request->tipo !== 'aluno' ? $request->identificacao : null;
-        $usuario->senha = bcrypt($request->senha);
-        $usuario->save();
+        User::create([
+            'nome' => $request->nome,
+            'email' => $request->email,
+            'tipo_usuario' => $request->tipo,
+            'matricula' => $request->tipo === 'aluno' ? $request->matricula : null,
+            'identificacao' => $request->tipo !== 'aluno' ? $request->identificacao : null,
+            'senha' => Hash::make($request->senha), // Senha criptografada
+        ]);
 
         // Redirecionar com mensagem de sucesso
         return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Usuário cadastrado com sucesso!');
@@ -49,8 +49,7 @@ class UserController extends Controller
     public function edit($id)
     {
         // Busca o usuário pelo ID
-        $usuario = Usuario::findOrFail($id);
-
+        $usuario = User::findOrFail($id);
         return view('Adm_views.editar_usuario', compact('usuario')); // Exibe o formulário de edição de usuário
     }
 
@@ -67,18 +66,16 @@ class UserController extends Controller
         ]);
 
         // Atualiza o usuário
-        $usuario = Usuario::findOrFail($id);
+        $usuario = User::findOrFail($id);
         $usuario->nome = $request->nome;
         $usuario->email = $request->email;
-        $usuario->tipo = $request->tipo;
+        $usuario->tipo_usuario = $request->tipo;
         $usuario->matricula = $request->tipo === 'aluno' ? $request->matricula : null;
         $usuario->identificacao = $request->tipo !== 'aluno' ? $request->identificacao : null;
-
         // Atualiza a senha se fornecida
         if ($request->filled('senha')) {
-            $usuario->senha = bcrypt($request->senha);
+            $usuario->senha = Hash::make($request->senha);
         }
-
         $usuario->save();
 
         // Redirecionar com mensagem de sucesso
@@ -88,10 +85,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         // Deleta o usuário do banco de dados
-        Usuario::findOrFail($id)->delete();
-
+        User::findOrFail($id)->delete();
         return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Usuário deletado com sucesso!');
     }
 }
-
-

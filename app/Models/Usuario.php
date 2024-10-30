@@ -5,9 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Admin;
+
 
 class UserController extends Controller
 {
+
+    protected $table = 'usuarios'; // Nome da tabela no banco de dados
+
+    protected $fillable = [
+        'nome',
+        'matricula',
+        'email',
+        'senha',
+        'tipo_usuario', // Verifique se este nome está correto em relação ao seu banco de dados
+        'identificacao', // Adicione outros campos se necessário
+    ];
+
     public function index()
     {
         // Aqui você deve buscar os usuários do banco de dados
