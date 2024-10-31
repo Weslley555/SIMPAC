@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Models;
 
@@ -9,6 +9,5 @@ class Aluno extends Model
 {
     use HasFactory;
 
-    // Defina as propriedades do modelo, como fillable ou guarded, conforme necessário.
-    protected $fillable = ['name', 'email', 'created_at']; // Exemplo
+    protected $fillable = ['nome', 'matricula', 'email', 'senha']; // Campos que podem ser preenchidos
 }

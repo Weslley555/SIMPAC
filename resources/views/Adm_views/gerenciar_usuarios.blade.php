@@ -21,7 +21,7 @@
             margin-bottom: 20px;
         }
         .btn-custom {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -56,7 +56,11 @@
 
     <div class="container">
         <h1>Gerenciar Usuários</h1>
-        <a href="{{ route('admin.cadastrar_usuario') }}" class="btn btn-success btn-custom">Cadastrar Novo Usuário</a>
+        
+        <!-- Botões para cadastrar diferentes tipos de usuários -->
+        <a href="{{ route('admin.cadastrar_aluno') }}" class="btn btn-primary btn-custom">Cadastrar Aluno</a>
+        <a href="{{ route('admin.cadastrar_adm') }}" class="btn btn-secondary btn-custom">Cadastrar Administrador</a>
+        <a href="{{ route('admin.cadastrar_avaliador') }}" class="btn btn-info btn-custom">Cadastrar Avaliador</a>
         
         <table class="table table-striped">
             <thead>
@@ -70,7 +74,7 @@
             <tbody>
                 @foreach($usuarios as $usuario)
                 <tr>
-                    <td>{{ $usuario->nome }}</td> <!-- Acesso ao objeto -->
+                    <td>{{ $usuario->nome }}</td>
                     <td>{{ $usuario->matricula }}</td>
                     <td>{{ $usuario->tipo_usuario }}</td>
                     <td>

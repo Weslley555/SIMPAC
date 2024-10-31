@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Usuário</title>
+    <title>Cadastrar Administrador</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -31,23 +31,13 @@
         .btn-primary:hover {
             background-color: #0056b3;
         }
-        .btn-secondary {
-            margin-left: 10px;
-        }
-        .form-control {
-            border-radius: 5px;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .form-group label {
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="card">
-            <h2 class="text-center">Cadastrar Usuário</h2>
-            <form action="{{ route('admin.cadastrar_usuario') }}" method="POST">
+            <h2 class="text-center">Cadastrar Administrador</h2>
+            <form action="{{ route('admin.cadastrar_adm') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="nome">Nome</label>
@@ -65,23 +55,13 @@
                     <label for="senha">Senha</label>
                     <input type="password" class="form-control" id="senha" name="senha" required>
                 </div>
-                <div class="form-group">
-                    <label for="tipo">Tipo de Usuário</label>
-                    <select class="form-control" id="tipo" name="tipo" required>
-                        <option value="aluno">Aluno</option>
-                        <option value="professor">Professor</option>
-                        <option value="administrador">Administrador</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <!-- Campo de tipo de usuário fixo para administrador -->
+                <input type="hidden" name="tipo" value="administrador">
+                
+                <button type="submit" class="btn btn-primary">Cadastrar Administrador</button>
                 <a href="{{ route('admin.gerenciar_usuarios') }}" class="btn btn-secondary">Voltar</a>
             </form>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
