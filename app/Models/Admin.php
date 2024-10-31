@@ -9,5 +9,6 @@ class Admin extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'matricula', 'email', 'senha']; // Campos que podem ser preenchidos
+    protected $fillable = ['nome', 'email', 'senha']; // Campos que podem ser preenchidos
+    // Mutator para hashear a senha
 }

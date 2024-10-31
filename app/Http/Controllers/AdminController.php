@@ -53,20 +53,19 @@ class AdminController extends Controller
     {
         $request->validate([
             'nome' => 'required|string|max:255',
-            'matricula' => 'required|string|max:255|unique:admins',
             'email' => 'required|email|unique:admins,email',
             'senha' => 'required|string|min:8',
         ]);
 
         Admin::create([
             'nome' => $request->nome,
-            'matricula' => $request->matricula,
             'email' => $request->email,
             'senha' => Hash::make($request->senha),
         ]);
 
         return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Administrador cadastrado com sucesso!');
     }
+    
 
     public function gerenciarUsuarios()
     {
