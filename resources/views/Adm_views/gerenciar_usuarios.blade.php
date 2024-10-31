@@ -72,14 +72,49 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($usuarios as $usuario)
+                <!-- Alunos -->
+                @foreach($alunos as $aluno)
                 <tr>
-                    <td>{{ $usuario->nome }}</td>
-                    <td>{{ $usuario->matricula }}</td>
-                    <td>{{ $usuario->tipo_usuario }}</td>
+                    <td>{{ $aluno->nome }}</td>
+                    <td>{{ $aluno->matricula }}</td>
+                    <td>Aluno</td>
                     <td>
                         <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('admin.delete_usuario', $usuario->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('admin.delete_usuario', $aluno->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+        
+                <!-- Administradores -->
+                @foreach($administradores as $admin)
+                <tr>
+                    <td>{{ $admin->nome }}</td>
+                    <td>-</td> <!-- Sem matrícula para Administradores -->
+                    <td>Administrador</td>
+                    <td>
+                        <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                        <form action="{{ route('admin.delete_usuario', $admin->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+        
+                <!-- Avaliadores -->
+                @foreach($avaliadores as $avaliador)
+                <tr>
+                    <td>{{ $avaliador->nome }}</td>
+                    <td>{{ $avaliador->matricula }}</td>
+                    <td>Avaliador</td>
+                    <td>
+                        <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                        <form action="{{ route('admin.delete_usuario', $avaliador->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
@@ -89,6 +124,7 @@
                 @endforeach
             </tbody>
         </table>
+        
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

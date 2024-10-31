@@ -9,5 +9,5 @@ class Avaliador extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'matricula', 'email', 'senha']; // Campos que podem ser preenchidos
+    protected $fillable = ['nome', 'email', 'senha', 'area_de_atuacao']; // Adicionando senha e area_de_atuacao
 }

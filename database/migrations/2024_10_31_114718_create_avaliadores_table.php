@@ -17,16 +17,12 @@ class CreateAvaliadoresTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email')->unique();
+            $table->string('senha');
             $table->string('area_de_atuacao'); // Campo para área de atuação do avaliador
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('avaliadores');

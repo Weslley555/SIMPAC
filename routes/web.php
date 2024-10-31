@@ -18,6 +18,25 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminController::class, 'authenticate'])->name('login.authenticate.admin');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+    Route::get('/admin/gerenciar-usuarios-view', function () {
+        return view('Adm_views.gerenciar_usuarios');
+    })->name('admin.gerenciar_usuarios_view');
+
+    Route::get('/admin/gerenciar-usuarios-view', function () {
+        $alunos = \App\Models\Aluno::all();
+        $administradores = \App\Models\Admin::all();
+        $avaliadores = \App\Models\Avaliador::all();
+    
+        return view('Adm_views.gerenciar_usuarios', compact('alunos', 'administradores', 'avaliadores'));
+    })->name('admin.gerenciar_usuarios_view');    
+    
+
+     // Adicionando rotas específicas para cadastro de aluno, administrador e avaliador
+    Route::get('/cadastrar_aluno', [AlunoController::class, 'create'])->name('admin.cadastrar_aluno');
+    Route::get('/cadastrar_adm', [AdminController::class, 'create'])->name('admin.cadastrar_adm');
+    Route::get('/cadastrar_avaliador', [AvaliadorController::class, 'create'])->name('admin.cadastrar_avaliador');
+    
 });
 
 // Rotas do aluno

@@ -17,16 +17,16 @@ class AvaliadorController extends Controller
     {
         $request->validate([
             'nome' => 'required|string|max:255',
-            'matricula' => 'required|string|max:255|unique:avaliadors',
             'email' => 'required|email|unique:avaliadors,email',
             'senha' => 'required|string|min:8',
+            'area_de_atuacao' => 'required|string|max:255', // Validação para área de atuação
         ]);
 
         Avaliador::create([
             'nome' => $request->nome,
-            'matricula' => $request->matricula,
             'email' => $request->email,
             'senha' => Hash::make($request->senha),
+            'area_de_atuacao' => $request->area_de_atuacao, // Incluindo área de atuação
         ]);
 
         return redirect()->route('Adm_views.gerenciar_usuarios')->with('success', 'Avaliador cadastrado com sucesso!');
