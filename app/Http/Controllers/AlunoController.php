@@ -10,7 +10,7 @@ class AlunoController extends Controller
 {
     public function create()
     {
-        return view('Aluno_views.cadastrar_aluno');
+        return view('Adm_views.cadastrar_aluno');
     }
 
     public function store(Request $request)

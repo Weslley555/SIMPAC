@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Gerenciar Usuários</a>
+                <a class="nav-link" href="{{ route('admin.gerenciar_usuarios') }}">Gerenciar Usuários</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Gerenciar Trabalhos</a>

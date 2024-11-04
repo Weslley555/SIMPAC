@@ -37,7 +37,19 @@
     <div class="container">
         <div class="card">
             <h2 class="text-center">Cadastrar Aluno</h2>
-            <form action="{{ route('admin.cadastrar_aluno') }}" method="POST">
+
+            <!-- Exibição de erros de validação -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('admin.cadastrar_aluno.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="nome">Nome</label>

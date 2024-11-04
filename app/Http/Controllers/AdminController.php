@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Aluno;
 
 class AdminController extends Controller
 {
@@ -67,15 +68,46 @@ class AdminController extends Controller
     }
     
 
-    public function gerenciarUsuarios()
+        public function gerenciarUsuarios()
     {
-        $admins = Admin::all();
-        return view('Adm_views.gerenciar_usuarios', compact('admins'));
+        $alunos = Aluno::all(); // Supondo que a model de aluno seja 'Aluno'
+        $administradores = Admin::all(); // Supondo que a model de administrador seja 'Administrador'
+        $avaliadores = Avaliador::all(); // Supondo que a model de avaliador seja 'Avaliador'
+        
+        return view('gerenciar_usuarios', compact('alunos', 'administradores', 'avaliadores'));
     }
+// Função para criar o Aluno!
+    public function createAluno()
+    {
+        return view('Adm_views.cadastrar_aluno'); // Altere isso se a view estiver em outra pasta
+    }
+    
 
     public function destroy($id)
     {
         Admin::findOrFail($id)->delete();
         return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Administrador deletado com sucesso!');
     }
+
+    public function storeAluno(Request $request)
+{
+    $request->validate([
+        'nome' => 'required|string|max:255',
+        'matricula' => 'required|string|unique:alunos,matricula',
+        'email' => 'required|email|unique:alunos,email',
+        'senha' => 'required|string|min:8',
+        'tipo' => 'required|string', // opcional, dependendo de como você deseja tratar
+    ]);
+
+    Aluno::create([
+        'nome' => $request->nome,
+        'matricula' => $request->matricula,
+        'email' => $request->email,
+        'senha' => Hash::make($request->senha), // Criptografar a senha
+        'tipo' => $request->tipo,
+    ]);
+
+    return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Aluno cadastrado com sucesso!');
+}
+
 }

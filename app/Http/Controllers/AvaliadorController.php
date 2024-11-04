@@ -17,7 +17,7 @@ class AvaliadorController extends Controller
     {
         $request->validate([
             'nome' => 'required|string|max:255',
-            'email' => 'required|email|unique:avaliadors,email',
+            'email' => 'required|email|unique:avaliadores,email',
             'senha' => 'required|string|min:8',
             'area_de_atuacao' => 'required|string|max:255', // Validação para área de atuação
         ]);

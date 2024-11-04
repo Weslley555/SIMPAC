@@ -27,13 +27,15 @@ Route::prefix('admin')->group(function () {
         $alunos = \App\Models\Aluno::all();
         $administradores = \App\Models\Admin::all();
         $avaliadores = \App\Models\Avaliador::all();
-    
+        
         return view('Adm_views.gerenciar_usuarios', compact('alunos', 'administradores', 'avaliadores'));
-    })->name('admin.gerenciar_usuarios_view');    
+    })->name('admin.gerenciar_usuarios_view');  
     
-
-     // Adicionando rotas específicas para cadastro de aluno, administrador e avaliador
+    
+//Rotas Aluno
     Route::get('/cadastrar_aluno', [AlunoController::class, 'create'])->name('admin.cadastrar_aluno');
+    Route::post('/cadastrar_aluno', [AlunoController::class, 'storeAluno'])->name('admin.cadastrar_aluno');
+
     Route::get('/cadastrar_adm', [AdminController::class, 'create'])->name('admin.cadastrar_adm');
     Route::get('/cadastrar_avaliador', [AvaliadorController::class, 'create'])->name('admin.cadastrar_avaliador');
     
@@ -74,3 +76,10 @@ Route::get('/test-db', function () {
     }
 });
 
+Route::get('/admin/gerenciar-usuarios', [AdminController::class, 'gerenciarUsuarios'])->name('admin.gerenciar_usuarios');
+
+Route::delete('/admin/usuarios/{id}', [AdminController::class, 'destroy'])->name('admin.delete_usuario');
+
+Route::get('/admin/cadastrar-aluno', [AdminController::class, 'createAluno'])->name('admin.cadastrar_aluno');
+
+Route::post('/admin/cadastrar-aluno', [AdminController::class, 'storeAluno'])->name('admin.cadastrar_aluno.store');

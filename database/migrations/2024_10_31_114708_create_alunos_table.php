@@ -12,15 +12,17 @@ class CreateAlunosTable extends Migration
      * @return void
      */
     public function up()
-    {
+{
     Schema::create('alunos', function (Blueprint $table) {
         $table->id();
-        $table->string('name');
+        $table->string('nome'); // Alterar para 'nome'
         $table->string('email')->unique();
         $table->string('matricula')->unique();
+        $table->string('senha'); // Adicione a coluna 'senha'
         $table->timestamps(); // Isso já cria as colunas created_at e updated_at
     });
-    }
+}
+
 
     /**
      * Reverse the migrations.
