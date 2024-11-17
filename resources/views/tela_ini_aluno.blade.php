@@ -104,7 +104,7 @@
     <div class="sidebar">
         <button onclick="window.location.href='{{ route('submeter.trabalho') }}'">Submeter Trabalho</button>
         <button onclick="window.location.href='#'">Trabalhos Submetidos</button>
-        <button onclick="window.location.href='{{ route('perfil') }}'">Perfil</button>
+        <button onclick="window.location.href='{{ route('aluno.perfil') }}'">Perfil</button>
         
         <!-- Botão de desconectar posicionado na parte inferior -->
         <form action="{{ route('logout') }}" method="POST" class="logout-btn">
@@ -118,7 +118,8 @@
         <div class="container">
             <img class="logo" src="https://th.bing.com/th/id/R.4ad702d6515c56ec4995268a8479a04c?rik=pF8Mj1GVzgvQ4w&pid=ImgRaw&r=0" alt="Logo Univicosa">
             <p class="greeting">Olá, Tudo bem?</p>
-            <h1 class="welcome-message">Seja bem-vindo<br>Pedro</h1>
+            <!-- Exibe dinamicamente o nome do aluno -->
+            <h1 class="welcome-message">Seja bem-vindo<br>{{ $aluno->nome ?? 'Aluno' }}</h1>
             <img class="profile-pic" src="https://via.placeholder.com/150" alt="Foto de Perfil">
         </div>
     </div>

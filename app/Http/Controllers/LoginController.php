@@ -3,45 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Aluno;
 
 class LoginController extends Controller
 {
     public function authenticate(Request $request)
     {
-        $matricula = $request->input('matricula');
-        $senha = $request->input('senha');
+        $request->validate([
+            'matricula' => 'required|string',
+            'senha' => 'required|string',
+        ]);
 
-        // Verificação simples de credenciais (substitua por lógica real)
-        if ($matricula == '12345' && $senha == '1') {
-            // Aqui você pode definir a lógica para autenticar o usuário,
-            // por exemplo, salvando a sessão, definindo o usuário autenticado, etc.
-            // Exemplo:
-            $request->session()->put('user_id', $matricula); // Exemplo simples
-            return redirect()->route('bemvindo');
+        $credentials = [
+            'matricula' => $request->input('matricula'),
+            'password' => $request->input('senha'),  // campo padrão usado pelo Auth
+        ];
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('aluno.dashboard');
         }
 
-        // Se as credenciais forem inválidas, redireciona de volta com erros
         return back()->withErrors(['message' => 'Credenciais inválidas!']);
     }
 
     public function logout()
     {
-        // Destruir sessão e/ou outras ações de logout
-        session()->flush();
-
-        // Redirecionar para a página de login
-        return redirect()->route('bemvindo');
+        Auth::logout();
+        return redirect()->route('logout');
     }
-
-    public function logoutToLogin()
-    {
-        // Destruir sessão e/ou outras ações de logout
-        session()->flush();
-
-        // Redirecionar para a página de login
-        return redirect()->route('login'); // Redireciona para a página de login
-    }
-
 }
+
 
 

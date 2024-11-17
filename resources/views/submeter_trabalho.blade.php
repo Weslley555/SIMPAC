@@ -6,7 +6,6 @@
     <title>Submeter Trabalho</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Ajuste de corpo centralizado com distância da menu bar */
         body {
             background-color: #001f3f;
             background-size: 8px 8px;
@@ -18,10 +17,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin-left: 250px; /* Compensa a largura da menu bar */
         }
 
-        /* Menu lateral */
         .menu {
             position: fixed;
             top: 0;
@@ -74,13 +71,11 @@
             border-radius: 5px;
         }
 
-        /* Botão de desconectar no final do menu */
         .menu .logout-btn {
             margin-top: auto;
             width: 100%;
         }
 
-        /* Container centralizado */
         .container {
             max-width: 600px;
             background-color: #f9f9f9;
@@ -88,7 +83,7 @@
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin: auto; /* Centraliza ao lado da menu bar */
+            margin: auto;
         }
 
         h1 {
@@ -96,20 +91,9 @@
             color: #2d3748;
             margin-bottom: 20px;
         }
-
-        /* Botão desconectar posicionado no final do menu lateral */
-        .sidebar .logout-btn {
-            margin-top: auto;
-            margin-bottom: 20px;
-            width: 80%;
-            background: #ff4d4d00;
-        }
-
-        
     </style>
 </head>
 <body>
-    <!-- Menu lateral -->
     <div class="menu">
         <h3>Menu</h3>
         <ul>
@@ -125,27 +109,20 @@
         </ul>
     </div>
 
-    <!-- Conteúdo centralizado -->
     <div class="container">
         <h1>Submeter Trabalho</h1>
-        <form action="#" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('trabalhos.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="responsaveis">Responsáveis</label>
-                <input type="text" class="form-control" id="responsaveis" name="responsaveis" required>
+                <input type="text" class="form-control" id="responsaveis" name="responsaveis[]" required>
+                <small id="responsaveisHelp" class="form-text text-muted">Adicione o nome dos responsáveis. Para adicionar mais, clique em 'Adicionar'.</small>
+                <div id="outrosResponsaveis"></div>
+                <button type="button" class="btn btn-secondary" id="adicionarResponsavel">Adicionar Responsável</button>
             </div>
             <div class="form-group">
-                <label for="curso">Curso</label>
-                <input type="text" class="form-control" id="curso" name="curso" required>
-            </div>
-            <div class="form-group">
-                <label for="tipo">Tipo de Trabalho</label>
-                <select class="form-control" id="tipo" name="tipo" required>
-                    <option value="">Selecione o tipo</option>
-                    <option value="oral">Oral</option>
-                    <option value="escrito">Escrito</option>
-                    <option value="banner">Banner</option>
-                </select>
+                <label for="modelo_avaliativo">Modelo Avaliativo</label>
+                <input type="text" class="form-control" id="modelo_avaliativo" name="modelo_avaliativo" required>
             </div>
             <div class="form-group">
                 <label for="titulo">Título do Trabalho</label>
@@ -162,5 +139,15 @@
             <button type="submit" class="btn btn-primary btn-block">Submeter</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('adicionarResponsavel').addEventListener('click', function() {
+            var novoResponsavel = document.createElement('input');
+            novoResponsavel.type = 'text';
+            novoResponsavel.classList.add('form-control');
+            novoResponsavel.name = 'responsaveis[]';
+            document.getElementById('outrosResponsaveis').appendChild(novoResponsavel);
+        });
+    </script>
 </body>
 </html>

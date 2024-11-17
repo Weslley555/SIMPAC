@@ -6,6 +6,7 @@ use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AvaliadorController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\TrabalhoController;
 
 // Rotas do administrador
 Route::prefix('admin')->group(function () {
@@ -83,3 +84,25 @@ Route::delete('/admin/usuarios/{id}', [AdminController::class, 'destroy'])->name
 Route::get('/admin/cadastrar-aluno', [AdminController::class, 'createAluno'])->name('admin.cadastrar_aluno');
 
 Route::post('/admin/cadastrar-aluno', [AdminController::class, 'storeAluno'])->name('admin.cadastrar_aluno.store');
+
+
+// Rota para a tela de submeter trabalho
+Route::get('/submeter-trabalho', function () {
+    return view('submeter_trabalho'); // Certifique-se de que a view 'submeter_trabalho' exista
+})->name('submeter.trabalho');
+
+// Rota para a tela de perfil do aluno
+Route::get('/perfil', function () {
+    $aluno = auth()->user(); // Obtendo o aluno autenticado
+    return view('perfil_aluno', compact('aluno')); // Passando o aluno para a view
+})->name('perfil');
+
+// Ajuste a rota do dashboard, utilizando o método correto do AlunoController
+Route::middleware(['web'])->group(function () {
+    Route::get('dashboard', [AlunoController::class, 'portal'])->name('aluno.dashboard'); // Ajuste conforme necessário
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('trabalhos/criar', [TrabalhoController::class, 'create'])->name('trabalhos.create');
+    Route::post('trabalhos', [TrabalhoController::class, 'store'])->name('trabalhos.store');
+});
