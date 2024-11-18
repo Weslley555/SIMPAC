@@ -45,7 +45,7 @@
 </head>
 <body>
     <div class="sidebar">
-        <button onclick="window.location.href='#'">Trabalhos Submetidos</button>
+        <button onclick="window.location.href='{{ route('aluno.historico_trabalhos') }}'">Trabalhos Submetidos</button>
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit" class="btn btn-danger mt-5">Desconectar</button>

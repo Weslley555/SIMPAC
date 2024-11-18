@@ -2,14 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Avaliador extends Model
+class Avaliador extends Model implements AuthenticatableContract
 {
-    use HasFactory;
-    
+    use Authenticatable;
+
     protected $table = 'avaliadores';
 
-    protected $fillable = ['nome', 'email', 'senha', 'area_de_atuacao']; // Adicionando senha e area_de_atuacao
+    protected $fillable = [
+        'nome', 'email', 'senha', 'area_de_atuacao',
+    ];
+
+    protected $hidden = [
+        'senha',
+    ];
 }

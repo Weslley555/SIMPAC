@@ -10,8 +10,7 @@ class TrabalhoController extends Controller
     // Exibir formulário de submissão de trabalho
     public function create()
     {
-        $alunos = Aluno::all();
-        dd($alunos);  // Recupera todos os alunos para o formulário
+        $alunos = Aluno::all();  // Recupera todos os alunos para o formulário
         return view('submeter_trabalho', compact('alunos')); // Passa os alunos para a view
     }
 

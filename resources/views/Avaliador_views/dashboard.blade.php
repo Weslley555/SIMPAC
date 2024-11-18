@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela do Administrador</title>
+    <title>Dashboard do Avaliador</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradiente laranja */
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -38,14 +38,14 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Painel do Administrador</a>
+        <a class="navbar-brand" href="#">Painel do Avaliador</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
+                    <form action="{{ route('avaliador.logout') }}" method="POST" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btn-danger">Desconectar</button>
                     </form>
@@ -56,11 +56,11 @@
 
     <!-- Main Content -->
     <div class="container">
-        <h1>Bem-vindo, Administrador</h1>
+        <h1>Bem-vindo, {{ Auth::user()->nome }}</h1> <!-- Exibindo o nome do avaliador -->
         <p>Selecione uma das opções abaixo:</p>
         <div>
-            <a href="{{ route('admin.gerenciar_usuarios') }}" class="btn btn-primary btn-custom">Gerenciar Usuário</a>
-            <a href="{{ route('admin.gerenciar_trabalhos') }}" class="btn btn-secondary btn-custom">Gerenciar Trabalhos</a>
+            <a href="{{ route('avaliador.avaliar_trabalhos') }}" class="btn btn-primary btn-custom">Avaliar Trabalhos</a>
+            <a href="{{ route('avaliador.historico') }}" class="btn btn-secondary btn-custom">Histórico de Trabalhos Avaliados</a>
         </div>
     </div>
 

@@ -59,71 +59,96 @@
         
         <!-- Botões para cadastrar diferentes tipos de usuários -->
         <a href="{{ route('admin.cadastrar_aluno') }}" class="btn btn-primary btn-custom">Cadastrar Aluno</a>
-        <a href="{{ route('admin.cadastrar_adm') }}" class="btn btn-secondary btn-custom">Cadastrar Administrador</a>
+        <a href="{{ route('admin.cadastrar') }}" class="btn btn-secondary btn-custom">Cadastrar Administrador</a>
         <a href="{{ route('admin.cadastrar_avaliador') }}" class="btn btn-info btn-custom">Cadastrar Avaliador</a>
         
-        <table class="table table-striped">
+        <!-- Alunos -->
+        <div class="mb-4">
+            <h2>Alunos</h2>
+            <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Matrícula</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Ações</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Matrícula</th>
+                <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Alunos -->
                 @foreach($alunos as $aluno)
                 <tr>
-                    <td>{{ $aluno->nome }}</td>
-                    <td>{{ $aluno->matricula }}</td>
-                    <td>Aluno</td>
-                    <td>
-                        <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('admin.delete_usuario', $aluno->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-        
-                <!-- Administradores -->
-                @foreach($administradores as $admin)
-                <tr>
-                    <td>{{ $admin->nome }}</td>
-                    <td>-</td> <!-- Sem matrícula para Administradores -->
-                    <td>Administrador</td>
-                    <td>
-                        <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('admin.delete_usuario', $admin->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-        
-                <!-- Avaliadores -->
-                @foreach($avaliadores as $avaliador)
-                <tr>
-                    <td>{{ $avaliador->nome }}</td>
-                    <td>{{ $avaliador->matricula }}</td>
-                    <td>Avaliador</td>
-                    <td>
-                        <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('admin.delete_usuario', $avaliador->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                        </form>
-                    </td>
+                <td>{{ $aluno->nome }}</td>
+                <td>{{ $aluno->matricula }}</td>
+                <td>
+                    <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                    <form action="{{ route('admin.delete_usuario', $aluno->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                </td>
                 </tr>
                 @endforeach
             </tbody>
-        </table>
+            </table>
+        </div>
+
+        <!-- Administradores -->
+        <div class="mb-4">
+            <h2>Administradores</h2>
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($administradores as $admin)
+                <tr>
+                <td>{{ $admin->nome }}</td>
+                <td>
+                    <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                    <form action="{{ route('admin.delete_usuario', $admin->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                </td>
+                </tr>
+                @endforeach
+            </tbody>
+            </table>
+        </div>
+
+        <!-- Avaliadores -->
+        <div class="mb-4">
+            <h2>Avaliadores</h2>
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Matrícula</th>
+                <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($avaliadores as $avaliador)
+                <tr>
+                <td>{{ $avaliador->nome }}</td>
+                <td>{{ $avaliador->matricula }}</td>
+                <td>
+                    <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                    <form action="{{ route('admin.delete_usuario', $avaliador->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                </td>
+                </tr>
+                @endforeach
+            </tbody>
+            </table>
+        </div>
         
     </div>
 

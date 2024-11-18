@@ -63,7 +63,7 @@
         <div class="d-flex flex-column align-items-center">
             <a href="{{ route('login') }}" class="btn btn-primary mb-3" style="width: 220px; font-size: 1.1rem;">Login Aluno</a>
             <a href="{{ route('admin.login') }}" class="btn btn-secondary mb-3" style="width: 220px; font-size: 1.1rem;">Login Administrador</a>
-            <a href="#" class="btn btn-success" style="width: 220px; font-size: 1.1rem;">Login Avaliador</a>
+            <a href="{{ route('avaliador.login') }}" class="btn btn-success" style="width: 220px; font-size: 1.1rem;">Login Avaliador</a>
         </div>
         <!-- Imagem no canto inferior direito -->
         <img src="https://th.bing.com/th/id/OIP.ntSuCwN5ueX85bh2J9ubLAHaDz?rs=1&pid=ImgDetMain" class="corner-image" alt="Imagem Canto Inferior Direito">

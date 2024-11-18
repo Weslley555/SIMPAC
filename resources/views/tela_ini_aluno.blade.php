@@ -103,7 +103,7 @@
     <!-- Menu lateral -->
     <div class="sidebar">
         <button onclick="window.location.href='{{ route('submeter.trabalho') }}'">Submeter Trabalho</button>
-        <button onclick="window.location.href='#'">Trabalhos Submetidos</button>
+        <button onclick="window.location.href='{{ route('aluno.historico_trabalhos') }}'">Trabalhos Submetidos</button>
         <button onclick="window.location.href='{{ route('aluno.perfil') }}'">Perfil</button>
         
         <!-- Botão de desconectar posicionado na parte inferior -->

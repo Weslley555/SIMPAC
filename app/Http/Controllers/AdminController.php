@@ -7,6 +7,9 @@ use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Aluno;
+use App\Models\Avaliador; // Importando a classe Avaliador
+use App\Models\Trabalho; // Importando a classe Trabalho
+use App\Models\User; 
 
 class AdminController extends Controller
 {
@@ -47,7 +50,7 @@ class AdminController extends Controller
 
     public function create()
     {
-        return view('Adm_views.cadastrar_admin');
+        return view('Adm_views.Cadastrar_Adm');
     }
 
     public function store(Request $request)
@@ -68,13 +71,12 @@ class AdminController extends Controller
     }
     
 
-        public function gerenciarUsuarios()
+    public function gerenciarUsuarios()
     {
-        $alunos = Aluno::all(); // Supondo que a model de aluno seja 'Aluno'
-        $administradores = Admin::all(); // Supondo que a model de administrador seja 'Administrador'
-        $avaliadores = Avaliador::all(); // Supondo que a model de avaliador seja 'Avaliador'
-        
-        return view('gerenciar_usuarios', compact('alunos', 'administradores', 'avaliadores'));
+    $alunos = Aluno::all();
+    $avaliadores = Avaliador::all();
+    $administradores = Admin::all();
+    return view('Adm_views.gerenciar_usuarios', compact('alunos', 'avaliadores', 'administradores'));
     }
 // Função para criar o Aluno!
     public function createAluno()
@@ -122,7 +124,6 @@ class AdminController extends Controller
         $trabalho = Trabalho::findOrFail($id);
         $trabalho->avaliador_id = $request->avaliador_id;
         $trabalho->save();
-
         return redirect()->route('admin.gerenciar_trabalhos')->with('success', 'Avaliador atribuído com sucesso!');
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Aluno;
+use App\Models\Trabalho;
 
 class AlunoController extends Controller
 {
@@ -64,6 +65,17 @@ class AlunoController extends Controller
         return view('Tela_ini_aluno', compact('aluno'));
     }
 
+    public function historicoTrabalhos()
+    {
+    $aluno = Auth::user();
+    $trabalhos = Trabalho::where('aluno_id', $aluno->id)->where('status', 'avaliado')->get();
+    return view('historico_trabalhos', compact('trabalhos'));
+    }
 
-
+    public function dashboard()
+    {
+        $aluno = Auth::user(); // Obtendo o aluno autenticado
+        return view('tela_ini_aluno', compact('aluno'));
+    }
 }
+
