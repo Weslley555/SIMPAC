@@ -60,7 +60,7 @@
         <p>Selecione uma das opções abaixo:</p>
         <div>
             <a href="{{ route('admin.gerenciar_usuarios_view') }}" class="btn btn-primary btn-custom">Gerenciar Usuário</a>
-            <a href="{{ route('admin.gerenciar_trabalhos') }}" class="btn btn-secondary btn-custom">Gerenciar Trabalhos</a>
+            <a href="{{ route('admin.trabalhos.index') }}" class="btn btn-secondary btn-custom">Gerenciar Trabalhos</a>
             <a href="{{ route('admin.gerenciar_permissoes') }}" class="btn btn-success btn-custom">Gerenciar Permissões</a>
         </div>
     </div>

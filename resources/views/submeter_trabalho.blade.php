@@ -114,40 +114,49 @@
         <form action="{{ route('trabalhos.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="responsaveis">Responsáveis</label>
-                <input type="text" class="form-control" id="responsaveis" name="responsaveis[]" required>
-                <small id="responsaveisHelp" class="form-text text-muted">Adicione o nome dos responsáveis. Para adicionar mais, clique em 'Adicionar'.</small>
-                <div id="outrosResponsaveis"></div>
-                <button type="button" class="btn btn-secondary" id="adicionarResponsavel">Adicionar Responsável</button>
+                <label for="responsavel_id">Responsável Principal</label>
+                <input type="hidden" name="responsavel_id" value="{{ Auth::id() }}">
+                <!-- O responsável principal será o usuário logado -->
             </div>
-            <div class="form-group">
-                <label for="modelo_avaliativo">Modelo Avaliativo</label>
-                <input type="text" class="form-control" id="modelo_avaliativo" name="modelo_avaliativo" required>
-            </div>
+        
             <div class="form-group">
                 <label for="titulo">Título do Trabalho</label>
                 <input type="text" class="form-control" id="titulo" name="titulo" required>
             </div>
+        
             <div class="form-group">
                 <label for="descricao">Descrição</label>
                 <textarea class="form-control" id="descricao" name="descricao" rows="3" required></textarea>
             </div>
+        
+            <div class="form-group">
+                <label for="modelo_avaliativo">Modelo Avaliativo</label>
+                <input type="text" class="form-control" id="modelo_avaliativo" name="modelo_avaliativo" required>
+            </div>
+        
             <div class="form-group">
                 <label for="arquivo">Arquivo</label>
                 <input type="file" class="form-control-file" id="arquivo" name="arquivo" required>
             </div>
+        
+            <div class="form-group">
+                <label for="membros">Outros Membros</label>
+                <input type="text" class="form-control" id="membros" name="membros[]">
+                <div id="outrosMembros"></div>
+                <button type="button" class="btn btn-secondary mt-2" id="adicionarMembro">Adicionar Membro</button>
+            </div>
+        
             <button type="submit" class="btn btn-primary btn-block">Submeter</button>
         </form>
-    </div>
-
-    <script>
-        document.getElementById('adicionarResponsavel').addEventListener('click', function() {
-            var novoResponsavel = document.createElement('input');
-            novoResponsavel.type = 'text';
-            novoResponsavel.classList.add('form-control');
-            novoResponsavel.name = 'responsaveis[]';
-            document.getElementById('outrosResponsaveis').appendChild(novoResponsavel);
-        });
-    </script>
+        
+        <script>
+            document.getElementById('adicionarMembro').addEventListener('click', function() {
+                var novoMembro = document.createElement('input');
+                novoMembro.type = 'text';
+                novoMembro.classList.add('form-control', 'mt-2');
+                novoMembro.name = 'membros[]';
+                document.getElementById('outrosMembros').appendChild(novoMembro);
+            });
+        </script>
 </body>
 </html>

@@ -90,7 +90,7 @@ class AdminController extends Controller
     }
 
     public function storeAluno(Request $request)
-{
+    {
     $request->validate([
         'nome' => 'required|string|max:255',
         'matricula' => 'required|string|unique:alunos,matricula',
@@ -108,6 +108,22 @@ class AdminController extends Controller
     ]);
 
     return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Aluno cadastrado com sucesso!');
+    }
+
+    public function gerenciarTrabalhos()
+{
+    $trabalhos = Trabalho::all();
+    $avaliadores = Avaliador::all();
+    return view('Gerenciar_Trabalhos', compact('trabalhos', 'avaliadores'));
 }
+
+    public function atribuirAvaliador(Request $request, $id)
+    {
+        $trabalho = Trabalho::findOrFail($id);
+        $trabalho->avaliador_id = $request->avaliador_id;
+        $trabalho->save();
+
+        return redirect()->route('admin.gerenciar_trabalhos')->with('success', 'Avaliador atribuído com sucesso!');
+    }
 
 }

@@ -44,10 +44,6 @@
                     <input type="text" class="form-control" id="nome" name="nome" required>
                 </div>
                 <div class="form-group">
-                    <label for="matricula">Matrícula</label>
-                    <input type="text" class="form-control" id="matricula" name="matricula" required>
-                </div>
-                <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
@@ -55,9 +51,7 @@
                     <label for="senha">Senha</label>
                     <input type="password" class="form-control" id="senha" name="senha" required>
                 </div>
-                <!-- Campo de tipo de usuário fixo para administrador -->
                 <input type="hidden" name="tipo" value="administrador">
-                
                 <button type="submit" class="btn btn-primary">Cadastrar Administrador</button>
                 <a href="{{ route('admin.gerenciar_usuarios') }}" class="btn btn-secondary">Voltar</a>
             </form>

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,41 +10,49 @@ class TrabalhoController extends Controller
     // Exibir formulário de submissão de trabalho
     public function create()
     {
-        $alunos = Aluno::all();  // Recupera todos os alunos para o formulário
+        $alunos = Aluno::all();
+        dd($alunos);  // Recupera todos os alunos para o formulário
         return view('submeter_trabalho', compact('alunos')); // Passa os alunos para a view
     }
 
     // Submeter o trabalho
+
     public function store(Request $request)
     {
-        // Validação dos dados
         $request->validate([
-            'responsavel_id' => 'required|exists:alunos,id', // Responsável
-            'titulo' => 'required|string|max:255', // Título
-            'descricao' => 'required|string', // Descrição
-            'modelo_avaliativo' => 'required|string', // Modelo avaliativo
-            'arquivo' => 'required|file|mimes:pdf,docx,doc', // Validação de arquivo
-            'membros' => 'nullable|array',  // Permitir membros opcionais
-            'membros.*' => 'exists:alunos,id', // Validação dos membros
+            'titulo' => 'required|string|max:255',
+            'descricao' => 'required|string',
+            'modelo_avaliativo' => 'required|string',
+            'arquivo' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'membros' => 'nullable|array',
         ]);
+
+        // Upload do arquivo
+        $arquivo = null;
+        if ($request->hasFile('arquivo')) {
+            $arquivo = $request->file('arquivo')->store('trabalhos', 'public');
+        }
 
         // Criar o trabalho
         $trabalho = Trabalho::create([
-            'responsavel_id' => $request->responsavel_id,
+            'responsavel_id' => Auth::id(),
             'titulo' => $request->titulo,
             'descricao' => $request->descricao,
             'modelo_avaliativo' => $request->modelo_avaliativo,
-            'arquivo' => $request->file('arquivo')->store('trabalhos'), // Armazenar o arquivo
+            'arquivo' => $arquivo,
         ]);
 
-        // Associar membros ao trabalho
+        // Associar membros
         if ($request->has('membros')) {
-            foreach ($request->membros as $membroId) {
-                $trabalho->membros()->attach($membroId); // Associar os membros
+            foreach ($request->membros as $membroNome) {
+                $membro = Aluno::where('nome', $membroNome)->first();
+                if ($membro) {
+                    $trabalho->membros()->attach($membro->id);
+                }
             }
         }
 
-        // Redirecionar com sucesso
-        return redirect()->route('trabalhos.index')->with('success', 'Trabalho submetido com sucesso!');
+        return redirect()->route('trabalhos.index')
+            ->with('success', 'Trabalho submetido com sucesso!');
     }
 }
