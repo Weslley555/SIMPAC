@@ -20,11 +20,11 @@ class Aluno extends Model implements AuthenticatableContract
         'senha',
     ];
 
-    /**
-     * Get the password for the user.
-     *
-     * @return string
-     */
+    public function setSenhaAttribute($value)
+    {
+        $this->attributes['senha'] = bcrypt($value);
+    }
+
     public function getAuthPassword()
     {
         return $this->senha;

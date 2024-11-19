@@ -55,6 +55,10 @@
                     <label for="senha">Senha</label>
                     <input type="password" class="form-control" id="senha" name="senha" required>
                 </div>
+                <div class="form-group">
+                    <label for="area_de_atuacao">Área de Atuação</label>
+                    <input type="text" class="form-control" id="area_de_atuacao" name="area_de_atuacao" required>
+                </div>
                 <!-- Campo de tipo de usuário fixo para avaliador -->
                 <input type="hidden" name="tipo" value="avaliador">
                 

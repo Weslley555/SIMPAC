@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AvaliadorController extends Controller
 {
-    public function create()
+    public function create()    
     {
         return view('Adm_views.cadastrar_avaliador');
     }
@@ -31,7 +31,8 @@ class AvaliadorController extends Controller
             'area_de_atuacao' => $request->area_de_atuacao, // Incluindo área de atuação
         ]);
 
-        return redirect()->route('Adm_views.gerenciar_usuarios')->with('success', 'Avaliador cadastrado com sucesso!');
+        return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Avaliador cadastrado com sucesso!');
+
     }
 
     public function gerenciarAvaliadores()

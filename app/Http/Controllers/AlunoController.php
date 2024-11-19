@@ -17,23 +17,19 @@ class AlunoController extends Controller
 
     // Salvar aluno no banco de dados
     public function store(Request $request)
-    {
-        $request->validate([
-            'nome' => 'required|string|max:255',
-            'matricula' => 'required|string|max:255|unique:alunos',
-            'email' => 'required|email|unique:alunos,email',
-            'senha' => 'required|string|min:8',
-        ]);
+{
+    $request->validate([
+        'nome' => 'required|string|max:255',
+        'matricula' => 'required|string|max:255|unique:alunos',
+        'email' => 'required|email|unique:alunos,email',
+        'senha' => 'required|string|min:8',
+    ]);
 
-        Aluno::create([
-            'nome' => $request->nome,
-            'matricula' => $request->matricula,
-            'email' => $request->email,
-            'senha' => bcrypt($request->senha),
-        ]);
+    Aluno::create($request->all());
 
-        return redirect()->route('Adm_views.gerenciar_usuarios')->with('success', 'Aluno cadastrado com sucesso!');
-    }
+    return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Aluno cadastrado com sucesso!');
+}
+
 
     // Gerenciar alunos
     public function gerenciarAlunos()

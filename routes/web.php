@@ -23,8 +23,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/cadastrar-aluno', [AdminController::class, 'storeAluno'])->name('admin.cadastrar_aluno.store');
     Route::get('/cadastrar-avaliador', [AvaliadorController::class, 'create'])->name('admin.cadastrar_avaliador');
     Route::post('/cadastrar-avaliador', [AvaliadorController::class, 'store'])->name('admin.cadastrar_avaliador.store');
-    Route::get('/cadastrar-adm', [AdminController::class, 'createAdm'])->name('admin.cadastrar_adm');
-    Route::post('/cadastrar-adm', [AdminController::class, 'storeAdm'])->name('admin.cadastrar_adm.store');
+    Route::post('/cadastrar-adm', [AdminController::class, 'store'])->name('admin.store');
+
+    // Route::get('/cadastrar-adm', [AdminController::class, 'createAdm'])->name('admin.cadastrar_adm');
+    // Route::post('/cadastrar-adm', [AdminController::class, 'storeAdm'])->name('admin.cadastrar_adm.store');
 });
 
 // Rotas do aluno
@@ -45,6 +47,8 @@ Route::prefix('avaliador')->group(function () {
     Route::get('/avaliar-trabalhos', [AvaliadorController::class, 'avaliarTrabalhos'])->name('avaliador.avaliar_trabalhos');
     Route::post('/avaliar-trabalhos/{id}', [AvaliadorController::class, 'avaliar'])->name('avaliador.avaliar');
     Route::get('/historico', [AvaliadorController::class, 'historico'])->name('avaliador.historico');
+    // Route::get('/gerenciar-usuarios', [AdminController::class, 'gerenciarUsuarios'])->name('admin.gerenciar_usuarios');
+
 });
 
 // Página inicial e rotas de login do aluno

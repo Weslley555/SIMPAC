@@ -37,7 +37,7 @@
     <div class="container">
         <div class="card">
             <h2 class="text-center">Cadastrar Administrador</h2>
-            <form action="{{ route('admin.cadastrar_adm') }}" method="POST">
+            <form action="{{ route('admin.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="nome">Nome</label>
@@ -55,6 +55,7 @@
                 <button type="submit" class="btn btn-primary">Cadastrar Administrador</button>
                 <a href="{{ route('admin.gerenciar_usuarios') }}" class="btn btn-secondary">Voltar</a>
             </form>
+
         </div>
     </div>
 </body>

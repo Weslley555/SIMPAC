@@ -41,6 +41,7 @@ class AdminController extends Controller
     }
 
     return back()->withErrors(['message' => 'Credenciais inválidas!']);
+
     }
 
     public function dashboard()
