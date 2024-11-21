@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
 
+
 class Admin extends Model
 {
     use HasFactory;
@@ -19,5 +20,10 @@ class Admin extends Model
     public function setSenhaAttribute($value)
     {
         $this->attributes['senha'] = Hash::make($value);
+    }
+
+    public function username()
+    {
+        return 'email';  // Usando matrícula para login
     }
 }

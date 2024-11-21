@@ -26,23 +26,22 @@ class AdminController extends Controller
 
     public function authenticate(Request $request)
     {
-    $request->validate([
-        'email' => 'required|string',
-        'senha' => 'required|string',
-    ]);
+        $request->validate([
+            'email' => 'required|string',
+            'senha' => 'required|string',
+        ]);
 
-    $email = $request->input('email');
-    $senha = $request->input('senha');
-    $admin = Admin::where('email', $email)->first();
+        $email = $request->input('email');
+        $senha = $request->input('senha');
 
-    if ($admin && Hash::check($senha, $admin->senha)) {
-        $request->session()->put('admin_id', $admin->id);
-        return redirect()->route('admin.dashboard');
+        // Verificar o login do administrador com o guard 'admin'
+        if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $senha], $request->remember)) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        return back()->withErrors(['message' => 'Credenciais inválidas!']);
     }
 
-    return back()->withErrors(['message' => 'Credenciais inválidas!']);
-
-    }
 
     public function dashboard()
     {

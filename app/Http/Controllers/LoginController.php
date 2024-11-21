@@ -12,31 +12,19 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $request->validate([
-            'matricula' => 'required|string',
+            'matricula' => 'required|string', // Altere para 'matricula' em vez de 'email'
             'senha' => 'required|string',
         ]);
 
-        $credentials = [
-            'matricula' => $request->input('matricula'),
-            'password' => $request->input('senha'),  // campo padrão usado pelo Auth
-        ];
+        $matricula = $request->input('matricula'); // Captura a matrícula
+        $senha = $request->input('senha'); // Captura a senha
+        $aluno = Aluno::where('matricula', $matricula)->first(); // Consulta o aluno pela matrícula
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('aluno.dashboard');
+        if ($aluno && Hash::check($senha, $aluno->senha)) {
+            Auth::login($aluno); // Autentica o aluno
+            return redirect()->route('aluno.dashboard'); // Redireciona para o dashboard do aluno
         }
 
-        return back()->withErrors(['message' => 'Credenciais inválidas!']);
+        return back()->withErrors(['message' => 'Credenciais inválidas!']); // Caso falhe, retorna erro
     }
-
-    public function logout()
-    {
-    Auth::logout();
-    return redirect()->route('login');
-    }
-
-
-
 }
-
-
-

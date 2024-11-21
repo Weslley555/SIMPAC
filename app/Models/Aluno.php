@@ -20,13 +20,14 @@ class Aluno extends Model implements AuthenticatableContract
         'senha',
     ];
 
-    public function setSenhaAttribute($value)
-    {
-        $this->attributes['senha'] = bcrypt($value);
-    }
-
     public function getAuthPassword()
     {
         return $this->senha;
     }
+
+    public function username()
+    {
+        return 'matricula';  // Usando matrícula para login
+    }
 }
+
