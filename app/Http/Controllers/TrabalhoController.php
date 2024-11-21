@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Trabalho;
 use App\Models\Aluno;
+use Illuminate\Support\Facades\Auth;
 
 class TrabalhoController extends Controller
 {
@@ -15,22 +16,18 @@ class TrabalhoController extends Controller
     }
 
     // Submeter o trabalho
-
     public function store(Request $request)
     {
         $request->validate([
             'titulo' => 'required|string|max:255',
             'descricao' => 'required|string',
-            'modelo_avaliativo' => 'required|string',
-            'arquivo' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'modelo_avaliativo' => 'required|string|max:255',
+            'arquivo' => 'nullable|file|mimes:pdf,doc,docx,zip|max:2048',
             'membros' => 'nullable|array',
         ]);
 
         // Upload do arquivo
-        $arquivo = null;
-        if ($request->hasFile('arquivo')) {
-            $arquivo = $request->file('arquivo')->store('trabalhos', 'public');
-        }
+        $arquivo = $request->hasFile('arquivo') ? $request->file('arquivo')->store('trabalhos', 'public') : 'Sem Anexo';
 
         // Criar o trabalho
         $trabalho = Trabalho::create([
@@ -53,5 +50,11 @@ class TrabalhoController extends Controller
 
         return redirect()->route('trabalhos.index')
             ->with('success', 'Trabalho submetido com sucesso!');
+    }
+
+    public function index()
+    {
+        $trabalhos = Trabalho::where('responsavel_id', Auth::id())->get();
+        return view('historico_trabalhos', compact('trabalhos'));
     }
 }

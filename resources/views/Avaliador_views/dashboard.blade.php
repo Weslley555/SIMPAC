@@ -13,32 +13,38 @@
             display: flex;
             flex-direction: column;
             align-items: center; /* Centralizando horizontalmente */
+            justify-content: center; /* Centralizando verticalmente */
+            margin: 0;
         }
         .navbar {
             margin-bottom: 20px;
             width: 100%; /* Faz a navbar ocupar toda a largura */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
         }
         .container {
             text-align: center; /* Centralizando o texto */
             color: white; /* Mudando a cor do texto para branco */
-            margin-top: 20px; /* Espaçamento do topo */
-            flex-grow: 1; /* Permite que a div cresça e ocupe o espaço disponível */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centralizando os botões */
-            justify-content: flex-start; /* Alinhando o conteúdo no topo */
+            padding: 20px;
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+            background: rgba(255, 255, 255, 0.1); /* Fundo semi-transparente */
         }
         .btn-custom {
             width: 200px;
             margin-bottom: 15px;
+            transition: background-color 0.3s, transform 0.3s; /* Transições suaves */
+        }
+        .btn-custom:hover {
+            background-color: #ff7e5f; /* Cor de fundo ao passar o mouse */
+            transform: scale(1.05); /* Aumenta ligeiramente o tamanho ao passar o mouse */
         }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Painel do Avaliador</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{{ route('avaliador.dashboard')}}">Painel do Avaliador</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -64,8 +70,12 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container">
-        <h1>Bem-vindo, {{ Auth::user()->nome }}</h1> <!-- Exibindo o nome do avaliador -->
+    <div class="container mt-5">
+        @if(Auth::guard('avaliador')->check())
+            <h1>Bem-vindo, {{ Auth::guard('avaliador')->user()->nome }}</h1> <!-- Exibindo o nome do avaliador -->
+        @else
+            <h1>Bem-vindo, Avaliador</h1>
+        @endif
         <p>Selecione uma das opções abaixo:</p>
         <div>
             <a href="{{ route('avaliador.avaliar_trabalhos') }}" class="btn btn-primary btn-custom">Avaliar Trabalhos</a>

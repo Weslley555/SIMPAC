@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #007bff, #00d4ff);
+            background: linear-gradient(to right, #6a11cb, #2575fc);
             margin: 0;
             padding: 0;
             display: flex;
@@ -47,7 +47,7 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">Painel do Administrador</a>
+        <a class="navbar-brand" href="{{ route('admin.dashboard')}}">Painel do Administrador</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

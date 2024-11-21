@@ -61,6 +61,7 @@ Route::get('/bem-vindo', function () { return view('Tela_ini_aluno'); })->name('
 // Rota para a tela de submeter trabalho
 Route::get('/submeter-trabalho', [TrabalhoController::class, 'create'])->name('submeter.trabalho');
 Route::post('/trabalhos', [TrabalhoController::class, 'store'])->name('trabalhos.store');
+Route::get('/trabalhos', [TrabalhoController::class, 'index'])->name('trabalhos.index');
 
 // Rota para a tela de perfil do aluno
 Route::get('/perfil', [AlunoController::class, 'showProfile'])->name('perfil')->middleware('auth');

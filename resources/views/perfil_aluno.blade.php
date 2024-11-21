@@ -8,13 +8,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradiente laranja */
+            background: #f0f4f8;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
         }
         .container {
             background: white;
@@ -53,7 +54,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Portal do Aluno</a>
+        <a class="navbar-brand" href="{{ route('aluno.dashboard') }}">Portal do Aluno</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

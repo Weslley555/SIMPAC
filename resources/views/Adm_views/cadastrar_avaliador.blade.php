@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #007bff, #00d4ff);
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
             color: #333;
             display: flex;
             justify-content: center;

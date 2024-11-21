@@ -8,13 +8,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradiente laranja */
+            background: #f0f4f8;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
         }
         .container {
             background: white;
@@ -46,7 +47,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Portal do Aluno</a>
+        <a class="navbar-brand" href="{{ route('aluno.dashboard') }}">Portal do Aluno</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -76,9 +77,15 @@
         <form action="{{ route('trabalhos.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="responsavel_id">Responsável Principal</label>
+                <label for="responsavel_nome">Nome do Responsável</label>
+                <input type="text" class="form-control" id="responsavel_nome" name="responsavel_nome" value="{{ Auth::user()->nome }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="responsavel_email">Email do Responsável</label>
+                <input type="email" class="form-control" id="responsavel_email" name="responsavel_email" value="{{ Auth::user()->email }}" readonly>
+            </div>
+            <div class="form-group">
                 <input type="hidden" name="responsavel_id" value="{{ Auth::id() }}">
-                <!-- O responsável principal será o usuário logado -->
             </div>
         
             <div class="form-group">
@@ -97,8 +104,8 @@
             </div>
         
             <div class="form-group">
-                <label for="arquivo">Arquivo</label>
-                <input type="file" class="form-control-file" id="arquivo" name="arquivo" required>
+                <label for="arquivo">Arquivo (opcional)</label>
+                <input type="file" class="form-control-file" id="arquivo" name="arquivo">
             </div>
         
             <div class="form-group">

@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'alunos',
         ],
+
+        'avaliador' => [
+        'driver' => 'session',
+        'provider' => 'avaliadores',
+        ],
     ],
 
     /*
@@ -63,6 +68,11 @@ return [
         'alunos' => [
             'driver' => 'eloquent',
             'model' => App\Models\Aluno::class,
+        ],
+
+        'avaliadores' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Avaliador::class,
         ],
 
         // 'users' => [
