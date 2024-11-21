@@ -33,11 +33,13 @@ class AdminController extends Controller
 
         $email = $request->input('email');
         $senha = $request->input('senha');
+        $admin = Admin::where('email', $email)->first();
 
-        // Verificar o login do administrador com o guard 'admin'
-        if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $senha], $request->remember)) {
-            return redirect()->route('admin.dashboard');
+        if ($admin && Hash::check($senha, $admin->senha)) {
+            Auth::login($admin); // Autentica o aluno
+            return redirect()->route('admin.dashboard'); // Redireciona para o dashboard do aluno
         }
+
 
         return back()->withErrors(['message' => 'Credenciais inválidas!']);
     }
@@ -126,5 +128,7 @@ class AdminController extends Controller
         $trabalho->save();
         return redirect()->route('admin.gerenciar_trabalhos')->with('success', 'Avaliador atribuído com sucesso!');
     }
+
+    
 
 }

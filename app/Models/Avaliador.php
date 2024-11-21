@@ -21,12 +21,6 @@ class Avaliador extends Model implements AuthenticatableContract
         'senha',
     ];
 
-    // Alteração para usar Hash::make() para criptografar a senha
-    public function setSenhaAttribute($value)
-    {
-        $this->attributes['senha'] = Hash::make($value); // Usando Hash::make() para garantir a mesma criptografia
-    }
-
     public function getAuthPassword()
     {
         return $this->senha;

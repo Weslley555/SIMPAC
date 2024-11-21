@@ -2,28 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable; // Certifique-se de importar essa classe
+use Illuminate\Notifications\Notifiable;
 
-
-
-class Admin extends Model
+class Admin extends Authenticatable
 {
-    use HasFactory;
+    use Notifiable;
 
+    protected $table = 'admins'; // Nome da tabela no banco de dados
     protected $fillable = ['nome', 'email', 'senha']; // Campos que podem ser preenchidos
+    protected $hidden = ['senha']; // Ocultar senha ao serializar o modelo
 
-
-    // Mutator para hashear a senha
-
-    public function setSenhaAttribute($value)
+    // Renomear o atributo senha para password
+    public function setPasswordAttribute($value)
     {
-        $this->attributes['senha'] = Hash::make($value);
-    }
-
-    public function username()
-    {
-        return 'email';  // Usando matrícula para login
+        $this->attributes['senha'] = bcrypt($value);
     }
 }
