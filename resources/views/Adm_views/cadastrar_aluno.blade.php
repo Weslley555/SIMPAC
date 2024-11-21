@@ -10,15 +10,19 @@
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #007bff, #00d4ff);
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            margin-top: 50px;
-        }
-        .card {
+            background: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            background-color: white;
+            width: 100%;
+            max-width: 500px;
         }
         h2 {
             margin-bottom: 20px;
@@ -35,45 +39,39 @@
 </head>
 <body>
     <div class="container">
-        <div class="card">
-            <h2 class="text-center">Cadastrar Aluno</h2>
+        <h2 class="text-center">Cadastrar Aluno</h2>
 
-            <!-- Exibição de erros de validação -->
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-            <form action="{{ route('admin.cadastrar_aluno.store') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" required>
-                </div>
-                <div class="form-group">
-                    <label for="matricula">Matrícula</label>
-                    <input type="text" class="form-control" id="matricula" name="matricula" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input type="password" class="form-control" id="senha" name="senha" required>
-                </div>
-                <!-- Campo de tipo de usuário fixo para aluno -->
-                <input type="hidden" name="tipo" value="aluno">
-                
-                <button type="submit" class="btn btn-primary">Cadastrar Aluno</button>
-                <a href="{{ route('admin.gerenciar_usuarios') }}" class="btn btn-secondary">Voltar</a>
-            </form>
-        </div>
+        <form action="{{ route('admin.cadastrar_aluno.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="matricula">Matrícula</label>
+                <input type="text" class="form-control" id="matricula" name="matricula" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar Aluno</button>
+            <a href="{{ route('admin.gerenciar_usuarios') }}" class="btn btn-secondary">Voltar</a>
+        </form>
     </div>
 </body>
 </html>

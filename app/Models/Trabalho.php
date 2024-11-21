@@ -15,23 +15,27 @@ class Trabalho extends Model
         'descricao',
         'modelo_avaliativo',
         'arquivo',
+        'avaliador_id',
+        'status',
     ];
 
-    // Relacionamento com o responsável (Aluno)
     public function responsavel()
     {
         return $this->belongsTo(Aluno::class, 'responsavel_id');
     }
 
-    // Relacionamento com membros (muitos-para-muitos)
-    public function membros()
-    {
-        return $this->belongsToMany(Aluno::class, 'membro_trabalho', 'trabalho_id', 'aluno_id');
-    }
-
-    // Relacionamento com avaliadores
     public function avaliador()
     {
-        return $this->belongsTo(Avaliador::class, 'avaliador_id'); // Assumindo que você tem um modelo Avaliador
+        return $this->belongsTo(Avaliador::class, 'avaliador_id');
+    }
+
+    public function avaliacao()
+    {
+        return $this->hasOne(Avaliacao::class, 'trabalho_id');
+    }
+
+    public function membros()
+    {
+        return $this->belongsToMany(Aluno::class, 'trabalho_membro', 'trabalho_id', 'aluno_id');
     }
 }

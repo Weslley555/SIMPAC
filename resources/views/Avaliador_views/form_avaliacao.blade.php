@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Trabalhos Avaliados</title>
+    <title>Avaliar Trabalho</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -21,18 +21,18 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 1200px;
+            max-width: 600px;
             margin-top: 20px;
         }
         h1 {
             color: #333;
         }
-        table {
-            margin-top: 20px;
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
         }
-        th, td {
-            text-align: center;
-            vertical-align: middle;
+        .btn-primary:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -45,13 +45,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Meus Dados</a>
+                    <a class="nav-link" href="{{ route('avaliador.meus_dados') }}">Meus Dados</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Trabalhos</a>
+                    <a class="nav-link" href="{{ route('avaliador.trabalhos') }}">Trabalhos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Histórico</a>
+                    <a class="nav-link" href="{{ route('avaliador.historico') }}">Histórico</a>
                 </li>
                 <li class="nav-item">
                     <form action="{{ route('avaliador.logout') }}" method="POST" class="d-inline">
@@ -64,27 +64,31 @@
     </nav>
 
     <div class="container mt-5">
-        <h1>Histórico de Trabalhos Avaliados</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Descrição</th>
-                    <th>Data de Avaliação</th>
-                    <th>Situação</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($trabalhos as $trabalho)
-                <tr>
-                    <td>{{ $trabalho->titulo }}</td>
-                    <td>{{ $trabalho->descricao }}</td>
-                    <td>{{ $trabalho->updated_at }}</td>
-                    <td>{{ $trabalho->avaliacao->situacao }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <h1>Avaliar Trabalho</h1>
+        <form action="{{ route('avaliador.salvar_avaliacao', $trabalho->id) }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="criterio1">Critério 1</label>
+                <input type="number" step="0.1" class="form-control" id="criterio1" name="criterio1" required>
+            </div>
+            <div class="form-group">
+                <label for="criterio2">Critério 2</label>
+                <input type="number" step="0.1" class="form-control" id="criterio2" name="criterio2" required>
+            </div>
+            <div class="form-group">
+                <label for="criterio3">Critério 3</label>
+                <input type="number" step="0.1" class="form-control" id="criterio3" name="criterio3" required>
+            </div>
+            <div class="form-group">
+                <label for="criterio4">Critério 4</label>
+                <input type="number" step="0.1" class="form-control" id="criterio4" name="criterio4" required>
+            </div>
+            <div class="form-group">
+                <label for="criterio5">Critério 5</label>
+                <input type="number" step="0.1" class="form-control" id="criterio5" name="criterio5" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Avaliação</button>
+        </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

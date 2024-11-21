@@ -45,6 +45,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
+                    <a class="nav-link" href="#">Meus Dados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Trabalhos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Histórico</a>
+                </li>
+                <li class="nav-item">
                     <form action="{{ route('avaliador.logout') }}" method="POST" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btn-danger">Desconectar</button>

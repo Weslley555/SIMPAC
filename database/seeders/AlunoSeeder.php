@@ -6,19 +6,21 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class AdminSeeder extends Seeder
+class AlunoSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('admins')->insert([
+        DB::table('alunos')->insert([
             [
-                'nome' => 'Admin 1',
-                'email' => 'admin1@example.com',
+                'nome' => 'Aluno 1',
+                'matricula' => 'aluno001',
+                'email' => 'aluno1@example.com',
                 'senha' => Hash::make('password'),
             ],
             [
-                'nome' => 'Admin 2',
-                'email' => 'admin2@example.com',
+                'nome' => 'Aluno 2',
+                'matricula' => 'aluno002',
+                'email' => 'aluno2@example.com',
                 'senha' => Hash::make('password'),
             ],
         ]);

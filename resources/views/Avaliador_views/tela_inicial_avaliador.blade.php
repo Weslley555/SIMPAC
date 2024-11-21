@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradiente laranja */
             height: 100vh;
             margin: 0;
             display: flex;

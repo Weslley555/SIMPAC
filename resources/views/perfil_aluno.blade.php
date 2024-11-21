@@ -7,51 +7,78 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #001f3f;
-            color: #ffffff;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradiente laranja */
             margin: 0;
             padding: 0;
             display: flex;
-            min-height: 100vh;
-            font-family: 'Arial', sans-serif;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 200px;
-            background-color: #007bff;
-            display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 20px;
+            min-height: 100vh;
         }
         .container {
-            margin-left: 220px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: calc(100% - 220px);
-            min-height: 100vh;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-top: 80px; /* Espaço para a navbar fixa */
         }
         .profile-pic {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .navbar {
+            background-color: #343a40;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: white;
+        }
+        .navbar-brand:hover, .navbar-nav .nav-link:hover {
+            color: #ff7e5f;
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <button onclick="window.location.href='{{ route('aluno.historico_trabalhos') }}'">Trabalhos Submetidos</button>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-danger mt-5">Desconectar</button>
-        </form>
-    </div>
-    <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Portal do Aluno</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('submeter.trabalho') }}">Submeter Trabalho</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('aluno.historico_trabalhos') }}">Trabalhos Submetidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('aluno.perfil') }}">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Desconectar</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
         <div class="text-center">
             <img class="profile-pic" src="https://via.placeholder.com/150" alt="Foto de Perfil">
             <h1>{{ $aluno->nome ?? 'Nome do Aluno' }}</h1>
@@ -59,5 +86,9 @@
             <p><strong>Matrícula:</strong> {{ $aluno->matricula ?? 'Matrícula não informada' }}</p>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

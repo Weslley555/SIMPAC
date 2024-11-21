@@ -114,17 +114,20 @@ class AdminController extends Controller
     }
 
     public function gerenciarTrabalhos()
-{
-    $trabalhos = Trabalho::all();
-    $avaliadores = Avaliador::all();
-    return view('Gerenciar_Trabalhos', compact('trabalhos', 'avaliadores'));
-}
+    {
+        $trabalhosSemAvaliador = Trabalho::whereNull('avaliador_id')->get();
+        $trabalhosComAvaliador = Trabalho::whereNotNull('avaliador_id')->get();
+        $avaliadores = Avaliador::all();
+        return view('Gerenciar_Trabalhos', compact('trabalhosSemAvaliador', 'trabalhosComAvaliador', 'avaliadores'));
+    }
 
     public function atribuirAvaliador(Request $request, $id)
     {
         $trabalho = Trabalho::findOrFail($id);
         $trabalho->avaliador_id = $request->avaliador_id;
+        $trabalho->status = 'pendente'; // Certifique-se de definir o status como 'pendente'
         $trabalho->save();
+
         return redirect()->route('admin.gerenciar_trabalhos')->with('success', 'Avaliador atribuído com sucesso!');
     }
 

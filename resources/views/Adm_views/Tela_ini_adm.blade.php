@@ -12,21 +12,21 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centralizando horizontalmente */
+            align-items: center;
+            justify-content: center;
+            margin: 0;
         }
         .navbar {
             margin-bottom: 20px;
-            width: 100%; /* Faz a navbar ocupar toda a largura */
+            width: 100%;
         }
         .container {
-            text-align: center; /* Centralizando o texto */
-            color: white; /* Mudando a cor do texto para branco */
-            margin-top: 20px; /* Espaçamento do topo */
-            flex-grow: 1; /* Permite que a div cresça e ocupe o espaço disponível */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centralizando os botões */
-            justify-content: flex-start; /* Alinhando o conteúdo no topo */
+            text-align: center;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
         .btn-custom {
             width: 200px;
@@ -37,7 +37,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">Painel do Administrador</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -45,7 +45,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
+                    <a class="nav-link" href="{{ route('admin.gerenciar_usuarios') }}">Gerenciar Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.gerenciar_trabalhos') }}">Gerenciar Trabalhos</a>
+                </li>
+                <li class="nav-item">
+                    <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-danger">Desconectar</button>
                     </form>

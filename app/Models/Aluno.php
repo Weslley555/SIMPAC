@@ -29,4 +29,10 @@ class Aluno extends Model implements AuthenticatableContract
     {
         return $this->senha;
     }
+
+    public function trabalhos()
+    {
+        return $this->belongsToMany(Trabalho::class, 'trabalho_membro', 'aluno_id', 'trabalho_id');
+    }
+
 }

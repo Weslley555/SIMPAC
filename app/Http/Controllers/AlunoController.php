@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Aluno;
 use App\Models\Trabalho;
+use Illuminate\Support\Facades\Hash;
 
 class AlunoController extends Controller
 {
@@ -17,19 +18,23 @@ class AlunoController extends Controller
 
     // Salvar aluno no banco de dados
     public function store(Request $request)
-{
-    $request->validate([
-        'nome' => 'required|string|max:255',
-        'matricula' => 'required|string|max:255|unique:alunos',
-        'email' => 'required|email|unique:alunos,email',
-        'senha' => 'required|string|min:8',
-    ]);
+    {
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'matricula' => 'required|string|max:255|unique:alunos',
+            'email' => 'required|email|unique:alunos,email',
+            'senha' => 'required|string|min:8',
+        ]);
 
-    Aluno::create($request->all());
+        Aluno::create([
+            'nome' => $request->nome,
+            'matricula' => $request->matricula,
+            'email' => $request->email,
+            'senha' => Hash::make($request->senha), // Hashing the password
+        ]);
 
-    return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Aluno cadastrado com sucesso!');
-}
-
+        return redirect()->route('admin.gerenciar_usuarios')->with('success', 'Aluno cadastrado com sucesso!');
+    }
 
     // Gerenciar alunos
     public function gerenciarAlunos()
@@ -54,7 +59,7 @@ class AlunoController extends Controller
         return view('perfil_aluno', compact('aluno'));
     }
 
-        // Controlador associado à view
+    // Controlador associado à view
     public function portal()
     {
         $aluno = Aluno::where('email', Auth::user()->email)->first();
@@ -63,9 +68,9 @@ class AlunoController extends Controller
 
     public function historicoTrabalhos()
     {
-    $aluno = Auth::user();
-    $trabalhos = Trabalho::where('aluno_id', $aluno->id)->where('status', 'avaliado')->get();
-    return view('historico_trabalhos', compact('trabalhos'));
+        $aluno = Auth::user();
+        $trabalhos = Trabalho::where('responsavel_id', $aluno->id)->where('status', 'avaliado')->get();
+        return view('historico_trabalhos', compact('trabalhos'));
     }
 
     public function dashboard()
@@ -74,4 +79,3 @@ class AlunoController extends Controller
         return view('tela_ini_aluno', compact('aluno'));
     }
 }
-

@@ -8,17 +8,31 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1200px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
             margin-top: 20px;
         }
-        h1 {
-            margin-bottom: 20px;
+        th, td {
+            text-align: center;
+            vertical-align: middle;
         }
         .btn-custom {
             margin-bottom: 10px;
@@ -28,7 +42,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">Painel do Administrador</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,13 +50,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.gerenciar_usuarios') }}">Gerenciar Usuários</a>
+                    <a class="nav-link" href="{{ route('admin.gerenciar_usuarios') }}">Gerenciar Usuários</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Gerenciar Trabalhos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Gerenciar Permissões</a>
+                    <a class="nav-link" href="{{ route('admin.gerenciar_trabalhos') }}">Gerenciar Trabalhos</a>
                 </li>
                 <li class="nav-item">
                     <form action="{{ route('admin.logout') }}" method="POST">
@@ -66,29 +77,29 @@
         <div class="mb-4">
             <h2>Alunos</h2>
             <table class="table table-striped">
-            <thead>
-                <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Matrícula</th>
-                <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($alunos as $aluno)
-                <tr>
-                <td>{{ $aluno->nome }}</td>
-                <td>{{ $aluno->matricula }}</td>
-                <td>
-                    <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                    <form action="{{ route('admin.delete_usuario', $aluno->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                    </form>
-                </td>
-                </tr>
-                @endforeach
-            </tbody>
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Matrícula</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($alunos as $aluno)
+                    <tr>
+                        <td>{{ $aluno->nome }}</td>
+                        <td>{{ $aluno->matricula }}</td>
+                        <td>
+                            <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ route('admin.delete_usuario', $aluno->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
 
@@ -96,27 +107,27 @@
         <div class="mb-4">
             <h2>Administradores</h2>
             <table class="table table-striped">
-            <thead>
-                <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($administradores as $admin)
-                <tr>
-                <td>{{ $admin->nome }}</td>
-                <td>
-                    <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                    <form action="{{ route('admin.delete_usuario', $admin->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                    </form>
-                </td>
-                </tr>
-                @endforeach
-            </tbody>
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($administradores as $admin)
+                    <tr>
+                        <td>{{ $admin->nome }}</td>
+                        <td>
+                            <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ route('admin.delete_usuario', $admin->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
 
@@ -124,29 +135,29 @@
         <div class="mb-4">
             <h2>Avaliadores</h2>
             <table class="table table-striped">
-            <thead>
-                <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Matrícula</th>
-                <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($avaliadores as $avaliador)
-                <tr>
-                <td>{{ $avaliador->nome }}</td>
-                <td>{{ $avaliador->matricula }}</td>
-                <td>
-                    <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                    <form action="{{ route('admin.delete_usuario', $avaliador->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                    </form>
-                </td>
-                </tr>
-                @endforeach
-            </tbody>
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Matrícula</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($avaliadores as $avaliador)
+                    <tr>
+                        <td>{{ $avaliador->nome }}</td>
+                        <td>{{ $avaliador->matricula }}</td>
+                        <td>
+                            <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ route('admin.delete_usuario', $avaliador->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
         
